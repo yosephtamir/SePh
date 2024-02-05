@@ -44,3 +44,8 @@ header {
     border: none;
     font-size: large;
 }
+
+.right .profile:hover, .logoimg:hover, .right nav button:hover {
+    opacity: 90%;
+    scale: 1.05;
+}
