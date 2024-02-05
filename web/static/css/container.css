@@ -67,3 +67,8 @@
     display: flex;
     justify-content: space-between;
 }
+
+.propdetails:hover {
+    opacity: 90%;
+    scale: 1.05;
+}

@@ -26,3 +26,8 @@
     font-size: large;
     margin-right: 10px;
 }
+
+.searchbtn:hover {
+    opacity: 90%;
+    scale: 1.05;
+}
