@@ -28,7 +28,7 @@ header {
     align-items: center;
     justify-content: right;
 }
-.right .profile {
+.right .profile img{
     width: 70px;
     height: 67px;
     background: url("../images/profile.png") no-repeat;
@@ -45,11 +45,37 @@ header {
     font-size: large;
 }
 
-.right .profile:hover, .logoimg:hover, .right nav button:hover {
+.right .profile img:hover, .logoimg:hover,
+.right nav button:hover, #register:hover,
+#login:hover  {
     opacity: 90%;
     scale: 1.05;
 }
 #homebtn{
     opacity: 90%;
     scale: 1.1;
+}
+.profilebtn{
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 85px;
+    width: 200px;
+    display: flex;
+    flex-direction: column;
+    background-color: #0d9aff9c;
+    align-content: space-around;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+}
+
+.profilebtn button {
+    background-color: #0D99ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 30px;
+    font-size: large;
+    width: 85%;
 }
