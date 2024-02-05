@@ -1,0 +1,46 @@
+body {
+    padding: 0%;
+    margin: auto;
+}
+header {
+    width: 100%px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #0D99ff;
+}
+.logo {
+    width: 20%;
+}
+.logoimg {
+    background: url("../images/70x67seph.png") no-repeat;
+    width: 70px;
+    height: 70px;
+    margin: auto;
+}
+.right {
+    width: 80%;
+    height: 70px;
+    border-bottom-left-radius: 35px;
+    border-top-left-radius: 35px;
+    background-color: #0D99ff;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+.right .profile {
+    width: 70px;
+    height: 67px;
+    background: url("../images/profile.png") no-repeat;
+    border-radius: 100%;
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 20px;
+}
+
+.right nav button {
+    background-color: #0D99ff;
+    color: white;
+    border: none;
+    font-size: large;
+}

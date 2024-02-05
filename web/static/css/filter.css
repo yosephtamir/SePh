@@ -1,0 +1,28 @@
+.filter {
+    height: 82px;
+    border-radius: 10px;
+    border: 1px solid #0D99ff;
+    width: 80%;
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.searchicon {
+    width: 75px;
+    height: 75px;
+    margin-left: 10px;
+    border-right: 1px solid #0D99ff;
+    background: url("../images/searchicon.png") no-repeat;
+
+}
+.searchbtn {
+    width: 20%;
+    background-color: #0D99ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    height: 52px;
+    font-size: large;
+    margin-right: 10px;
+}
