@@ -16,7 +16,7 @@ class Property(BaseModel, Base):
     addressLine2 = Column(String(1000), nullable=True)
     user_id = Column(String(60), ForeignKey('user.id'), nullable=False)
     place_id = Column(String(60), ForeignKey('place.id'), nullable=False)
-    images = relationship("PropertyImage", backref=property)
+    images = relationship("PropertyImage", backref="property")
     
 
     def __init__(self, *args, **kwargs):
