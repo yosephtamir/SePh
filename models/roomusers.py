@@ -11,9 +11,8 @@ class RoomUser(BaseModel, Base):
     """A roomuser representation"""
     __tablename__ = "roomuser"
     name = Column(String(128), nullable=False)
-    user_id = Column(String(60), ForeignKey('user.id'), nullable=False)
-    place_id = Column(String(60), ForeignKey('place.id'), nullable=False)
-
+    userid = Column(String(60), ForeignKey('user.id'), nullable=False)
+    messageid = Column(String(60), ForeignKey('messages.id'))
     
 
     def __init__(self, *args, **kwargs):
