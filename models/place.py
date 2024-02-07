@@ -8,10 +8,10 @@ from sqlalchemy import Column, String, ForeignKey
 class Place(BaseModel, Base):
     """A place representation"""
     __tablename__ = "place"
-    city = Column(String(128), nullable=False)
-    subcity = Column(String(128), nullable=False)
     addressLine1 = Column(String(1000), nullable=False)
     addressLine2 = Column(String(1000), nullable=True)
+    userid = Column(String(60), ForeignKey('user.id'), nullable=False)
+    subcityid = Column(String(60), ForeignKey('subcity.id'), nullable=False)
     
 
     def __init__(self, *args, **kwargs):

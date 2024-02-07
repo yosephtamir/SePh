@@ -7,7 +7,7 @@ from os import getenv
 import sqlalchemy
 from models.property import Property
 from models.messages import Messages
-from sqlalchemy import Column, String, Numeric
+from sqlalchemy import Column, String, Numeric, Boolean
 from sqlalchemy.orm import relationship
 from hashlib import md5
 
@@ -16,19 +16,19 @@ class User(BaseModel, Base):
     """Representation of a user"""
 
     __tablename__ = 'user'
-    first_name = Column(String(128), nullable=True)
-    last_name = Column(String(128), nullable=True)
+    first_name = Column(String(128), nullable=False)
+    last_name = Column(String(128), nullable=False)
     username = Column(String(128), nullable=False, unique=True)
     email = Column(String(128), nullable=False, unique=True)
-    phonenumber = Column(Numeric(20), nullable=True)
-    password = Column(String(128), nullable=True)
-    country = Column(String(128), nullable=True)
-    region = Column(String(128), nullable=True)
+    phonenumber = Column(Numeric(20), nullable=False)
+    password = Column(String(128), nullable=False)
+    country = Column(String(128), nullable=False)
+    region = Column(String(128), nullable=False)
     zone = Column(String(128), nullable=True)
     wereda = Column(String(128), nullable=True)
-    idcard = Column(String(128), nullable=True)
+    idnumb = Column(String(128), nullable=True)
     profilepic = Column(String(128), nullable=True)
-    messages = relationship("Messages", backref="user")
+    isactive = Column(Boolean, unique=False, default=False)
     properties = relationship("Property", backref="user")
 
     def __init__(self, *args, **kwargs):

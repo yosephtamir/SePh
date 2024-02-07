@@ -2,4 +2,6 @@
 *test*
 con.py
 text.py
-*pyc*
+*.pyc
+*__pycache__*
+*.db

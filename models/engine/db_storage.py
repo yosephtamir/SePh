@@ -12,6 +12,8 @@ from models.property import Property
 from models.propertyimage import PropertyImage
 from models.roomusers import RoomUser
 from models.user import User
+from models.subcity import SubCity
+from models.city import City
 from models.base_model import BaseModel, Base
 from os import getenv
 import sqlalchemy
@@ -20,7 +22,8 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {"Category": Category, "ChatRoom": ChatRoom,
            "Place": Place, "Messages": Messages, "Property": Property,
-           "PropertyImage": PropertyImage, "RoomUser": RoomUser, "User": User}
+           "PropertyImage": PropertyImage, "RoomUser": RoomUser, "User": User,
+           "SubCity": SubCity, "City": City}
 
 
 class DBStorage:

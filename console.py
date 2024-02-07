@@ -12,14 +12,16 @@ from models.property import Property
 from models.propertyimage import PropertyImage
 from models.roomusers import RoomUser
 from models.user import User
+from models.subcity import SubCity
+from models.city import City
 from models.base_model import BaseModel
 from models.user import User
 import shlex  # for splitting the line along spaces except in double quotes
 
 classes = {"Category": Category, "ChatRoom": ChatRoom,
            "Place": Place, "Messages": Messages, "Property": Property,
-           "PropertyImage": PropertyImage, "RoomUser": RoomUser, "User": User}
-
+           "PropertyImage": PropertyImage, "RoomUser": RoomUser, "User": User,
+           "SubCity": SubCity, "City": City}
 
 class SePhCommand(cmd.Cmd):
     """ SePh console """
