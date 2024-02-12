@@ -15,7 +15,6 @@ class Property(BaseModel, Base):
     kare = Column(String(128), nullable=False)
     details = Column(String(1000), nullable=False)
     addressLine2 = Column(String(1000), nullable=True)
-    categoryid = Column(String(60), ForeignKey('category.id'), nullable=False)
     user_id = Column(String(60), ForeignKey('user.id'), nullable=False)
     place_id = Column(String(60), ForeignKey('place.id'), nullable=False)
     images = relationship("PropertyImage", backref="property")

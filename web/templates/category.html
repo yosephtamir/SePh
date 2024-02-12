@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="../static/css/header.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/mainbootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/filter.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/container.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/footer.css" rel="stylesheet" type="text/css">
+    <link href="../static/images/70x67seph.png" rel="icon thumbnail">
+    <title>Seph</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logoimg"></div>
+        </div>
+        <div class="right">
+            <nav>
+                <button id="homebtn"><a>Home</a></button>
+                <button><a>Messages</a></button>
+                <button><a>Notifications</a></button>
+                <button><a>About</a></button>
+                <button><a>Contuct Us</a></button>
+            </nav>
+            <div class="profile">
+                <img id="proimg" src="../static/images/profile.png" alt="Beka Gidada">
+                <div class="profilebtn">
+                    <button id="login"><a>Log In</a></button>
+                    <button id="register"><a>Sign Up</a></button>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+          </div>
+    </main>
+
+    <div class="container">
+        <div class="content-section">
+            <form method="POST" action="">
+                {{ form.hidden_tag() }}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">Add Category</legend>
+                    <!--First Name-->
+                    <div class="form-group">
+                        {{ form.name.label(class="form-control-label") }}
+    
+                        {% if form.name.errors %}
+                            {{ form.name(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.name.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.name(class="form-control form-control-lg") }}
+                        {% endif %}
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    {{ form.submit(class="btn btn-outline-info") }}
+                </div>
+            </form>
+        </div>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" href="{{ url_for('register') }}">Sign In</a>
+            </small>
+        </div>
+        
+    </div>
+<footer id="copyr">
+    <h3 id="valyotime">SePh - Value your Time, Secure your property!</h3>
+</footer>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="../static/scripts/filter.js"></script>
+</body>
+</html>
