@@ -44,7 +44,12 @@ def register():
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        user = User(first_name=form.first_name.data, last_name=form.last_name.data,
+                    username=form.username.data, email=form.email.data, phonenumber=form.phonenumber.data,
+                    country=form.country.data, region=form.region.data,
+                    zone=form.zone.data, wereda=form.wereda.data,
+                    idnumb=form.idnumb.data, profilepic=form.profilepic.data,
+                    password=hashed_password)
         storage.new(user)
         storage.save()
         flash('Your account has been created! You are now able to log in', 'success')
