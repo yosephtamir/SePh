@@ -1,9 +1,11 @@
 #!/usr/bin/python3
 """ Starts a Flash Web Application """
+from web import app, bcrypt, login_manager
 from web.forms import RegistrationForm, CategoryForm
 from flask import render_template, redirect, url_for, flash
-from web import app, login_manager
-from web import bcrypt
+from models.user import User
+from models.category import Category
+from models.property import Property
 from models import storage
 
 # app.jinja_env.trim_blocks = True
@@ -11,7 +13,6 @@ from models import storage
 
 """login_manager.login_view = 'login'
 login_manager.login_message_category = 'info'"""
-
 
 @app.teardown_appcontext
 def close_db(error):
@@ -23,8 +24,6 @@ def close_db(error):
 @app.route('/property', strict_slashes=False)
 @app.route('/property/<id>', strict_slashes=False)
 def property(id=""):
-
-    from models.property import Property
     """ displays a HTML page with a list of cities by states """
     properties = storage.countablefetch(Property).values()
     properties = sorted(properties, key=lambda k: k.name)
@@ -34,9 +33,6 @@ def property(id=""):
                            properties=properties, count = count)
 @app.route('/category', strict_slashes=False, methods=["GET", "POST"])
 def category():
-
-    from models.category import Category
-
     form = CategoryForm()
     if form.validate_on_submit():
         category = Category(name=form.name.data)
@@ -46,7 +42,6 @@ def category():
 
 @app.route('/register', strict_slashes=False, methods=["GET", "POST"])
 def register():
-    from models.user import User
     """ displays a HTML page with a list of cities by states """
     form = RegistrationForm()
     if form.validate_on_submit():
