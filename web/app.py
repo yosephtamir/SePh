@@ -2,10 +2,15 @@
 """ Starts a Flash Web Application """
 from web import app, bcrypt, login_manager
 from web.forms import RegistrationForm, CategoryForm, LoginForm, UserProfile
+from web.forms import CityForm, SubCityForm, PropertyForm
 from flask import render_template, redirect, url_for, flash
 from models.user import User
 from models.category import Category
 from models.property import Property
+from models.city import City
+from models.subcity import SubCity
+from models.place import Place
+from models.propertyimage import PropertyImage
 from models import storage
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -24,9 +29,9 @@ def close_db(error):
 def home():
     properties = storage.countablefetch(Property).values()
     properties = sorted(properties, key=lambda k: k.name)
-    count = 0
+
     return render_template('seph.html',
-                           properties=properties, count = count)
+                           properties=properties, title = 'Home')
 
 @app.route('/property', strict_slashes=False)
 @app.route('/property/<id>', strict_slashes=False)
@@ -34,10 +39,9 @@ def property(id=""):
     """ displays a HTML page with a list of cities by states """
     properties = storage.countablefetch(Property).values()
     properties = sorted(properties, key=lambda k: k.name)
-    count = 0
 
     return render_template('seph.html',
-                           properties=properties, count = count)
+                           properties=properties, title = 'Property')
 @app.route('/category', strict_slashes=False, methods=["GET", "POST"])
 def category():
     form = CategoryForm()
@@ -45,11 +49,29 @@ def category():
         category = Category(name=form.name.data)
         storage.new(category)
         storage.save()
-    return render_template('category.html', form=form)
+    return render_template('category.html', form=form, title='Category')
+
+@app.route('/city', strict_slashes=False, methods=["GET", "POST"])
+def city():
+    form = CityForm()
+    if form.validate_on_submit():
+        city = City(city=form.city.data)
+        storage.new(city)
+        storage.save()
+    return render_template('city.html', form=form, title='City')
+
+@app.route('/subcity', strict_slashes=False, methods=["GET", "POST"])
+def subcity():
+    form = SubCityForm()
+    if form.validate_on_submit():
+        cityname = storage.valCheck("city", value=form.city_name.data, cls="City")
+        subcity = SubCity(subcity=form.subCity_name.data, cityid=cityname.id)
+        storage.new(subcity)
+        storage.save()
+    return render_template('subcity.html', form=form, title='Sub City')
 
 @app.route('/register', strict_slashes=False, methods=["GET", "POST"])
 def register():
-    """ displays a HTML page with a list of cities by states """
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = RegistrationForm()
@@ -66,7 +88,7 @@ def register():
         storage.save()
         flash('Your account has been created! You are now able to log in', 'success')
         return redirect(url_for('category'))
-    return render_template('register.html', form=form)
+    return render_template('register.html', form=form, title='Register')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -99,7 +121,6 @@ def myprofile():
 def editprofile():
     form = UserProfile()
     if form.validate_on_submit():
-        current_user
         if bcrypt.check_password_hash(current_user.password, form.password.data):
             #updating firstname
             if form.first_name.data and form.first_name.data is not "":
@@ -138,7 +159,45 @@ def editprofile():
             storage.new(current_user)
             storage.save()
             return redirect(url_for('myprofile'))
-    return render_template('editprofile.html', title='My Profile', form=form)
+    return render_template('editprofile.html', title='Edit Profile', form=form)
+
+
+@app.route("/myprofile/addproperty", methods=['GET', 'POST'])
+@login_required
+def addproperty():
+    form = PropertyForm()
+    if form.validate_on_submit():
+            subcityname = storage.valCheck("subcity", value=form.subcity.data, cls="SubCity")
+            categoryname = storage.valCheck("name", value=category.data, cls="Category")
+            subcity_id = subcityname.id
+            categoryid = categoryname.id
+            place = Place(addressLine1=form.addressline1.data, addressLine2=str(form.addressline2.data),
+                            userid=current_user.id, subcityid=subcity_id)
+            storage.new(place)
+
+            property = Property(name=form.name.data, price=form.price.data,
+                                kare=form.kare.data, details=form.details.data,
+                                addressLine2=form.addressline2.data,
+                                user_id=current_user.id, place_id=place.id,
+                                categoryid=categoryid)
+            storage.new(property)
+            image1 = PropertyImage(name=form.image1.data, property_id=current_user.id)
+            storage.new(image1)
+
+            if form.image2.data and form.image2.data is not "":
+                image2 = PropertyImage(name=form.image2.data, property_id=current_user.id)
+                storage.new(image2)
+                
+
+            if form.image3.data and form.image3.data is not "":
+                image3 = PropertyImage(name=form.image3.data, property_id=current_user.id)
+                storage.new(image3)
+
+            storage.save()
+            return redirect(url_for('myprofile'))
+    return render_template('postproperty.html', title='My Profile: Post Property', form=form)
+            
+
 
 if __name__ == "__main__":
     """ Main Function """

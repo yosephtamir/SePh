@@ -5,19 +5,19 @@
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Add Category</legend>
-                <!--First Name-->
+                <!-- city-->
                 <div class="form-group">
-                    {{ form.name.label(class="form-control-label") }}
+                    {{ form.city.label(class="form-control-label") }}
 
-                    {% if form.name.errors %}
-                        {{ form.name(class="form-control form-control-lg is-invalid") }}
+                    {% if form.city.errors %}
+                        {{ form.city(class="form-control form-control-lg is-invalid") }}
                         <div class="invalid-feedback">
-                            {% for error in form.name.errors %}
+                            {% for error in form.city.errors %}
                                 <span>{{ error }}</span>
                             {% endfor %}
                         </div>
                     {% else %}
-                        {{ form.name(class="form-control form-control-lg") }}
+                        {{ form.city(class="form-control form-control-lg") }}
                     {% endif %}
                 </div>
             </fieldset>

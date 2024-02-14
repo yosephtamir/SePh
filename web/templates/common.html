@@ -14,7 +14,11 @@
         <link href="../static/css/myprofile.css" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../static/{{current_user.username}}/{{current_user.profilepic}}" >
     {% endif %}
-    <title>Seph</title>
+    {% if title %}
+        <title>SePh - {{ title }}</title>
+    {% else %}
+        <title>SePh</title>
+    {% endif %}
 </head>
 <body>
     <header>

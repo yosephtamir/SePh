@@ -1,0 +1,44 @@
+{% extends "common.html" %}
+{% block content %}
+    <div class="content-section">
+        <form method="POST" action="">
+            {{ form.hidden_tag() }}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Add Category</legend>
+                <!-- city name-->
+                <div class="form-group">
+                    {{ form.city_name.label(class="form-control-label") }}
+
+                    {% if form.city_name.errors %}
+                        {{ form.city_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.city_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.city_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+                <!-- sub city name-->
+                <div class="form-group">
+                    {{ form.subCity_name.label(class="form-control-label") }}
+
+                    {% if form.subCity_name.errors %}
+                        {{ form.subCity_name(class="form-control form-control-lg is-invalid") }}
+                        <div class="invalid-feedback">
+                            {% for error in form.subCity_name.errors %}
+                                <span>{{ error }}</span>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        {{ form.subCity_name(class="form-control form-control-lg") }}
+                    {% endif %}
+                </div>
+            </fieldset>
+            <div class="form-group">
+                {{ form.submit(class="btn btn-outline-info") }}
+            </div>
+        </form>
+    </div>
+{% endblock content %}

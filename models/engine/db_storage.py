@@ -63,6 +63,15 @@ class DBStorage:
             objs = self.__session.query(classes[cls]).filter_by(name=value).first()
             return objs
 
+        if checkedVal == "city":
+            objs = self.__session.query(classes[cls]).filter_by(city=value).first()
+            return objs
+        
+        if checkedVal == "subcity":
+            objs = self.__session.query(classes[cls]).filter_by(subcity=value).first()
+            return objs
+        
+
         if checkedVal == "id":
             objs = self.__session.query(classes[cls]).filter_by(id=value).first()
             return objs

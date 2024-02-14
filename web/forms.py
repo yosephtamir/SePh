@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
 from models import storage
 from models.user import User
+from wtforms import FileField
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
@@ -66,6 +67,29 @@ class CategoryForm(FlaskForm):
         if user:
             raise ValidationError('This category already exists.')
 
+class CityForm(FlaskForm):
+    city = StringField("City", validators=[DataRequired()])
+    submit = SubmitField('Add to city')
+
+    def validate_city(self, city):
+        cityname = storage.valCheck("city", value=city.data, cls="City")
+        if cityname:
+            raise ValidationError('This City already exists.')
+        if city.data is None:
+            raise ValidationError('City Cannot be Null.')
+        if city.data == "":
+            raise ValidationError('City Cannot be Null.')
+        
+class SubCityForm(FlaskForm):
+    city_name = StringField("City Name", default="Addis Ababa")
+    subCity_name = StringField("Sub city name")
+    submit = SubmitField('Add to subcity')
+
+    def validate_subCity_name(self, subCity_name):
+        subCity = storage.valCheck("subcity", value=subCity_name.data, cls="SubCity")
+        if subCity:
+            raise ValidationError('This SubCity already exists.')
+
 
 class UserProfile(FlaskForm):
     first_name = StringField('First Name',
@@ -104,3 +128,30 @@ class UserProfile(FlaskForm):
         user = storage.valCheck("phonenumber", value=phonenumber.data)
         if user and user.phonenumber is not phonenumber.data:
             raise ValidationError('That phone number is taken. Please choose a different one.')
+
+class PropertyForm(FlaskForm):
+    name = StringField("Name", default="Addis Ababa")
+    price = FloatField("Price", validators=[DataRequired()])
+    kare = FloatField("Kare", validators=[DataRequired()])
+    details = StringField("Details", validators=[DataRequired()])
+    city = StringField("City", default="Addis Ababa")
+    subcity = StringField("SubCity")
+    category = StringField("Category")
+    addressline1 = StringField("Address Line 2")
+    addressline2 = StringField("Address Line 2")
+    image1 = StringField("Image 1", validators=[DataRequired()])
+    image2 = StringField("Image 2")
+    image3 = StringField("Image 3")
+
+    submit = SubmitField('Post Your Property')
+
+    
+    def validate_subcity(self, subcity):
+        subcityname = storage.valCheck("subcity", value=subcity.data, cls="SubCity")
+        if subcityname == None:
+            raise ValidationError('Subcity does not exist')
+        
+    def validate_category(self, category):
+        categoryname = storage.valCheck("name", value=category.data, cls="Category")
+        if categoryname == None:
+            raise ValidationError('Category does not exist')
