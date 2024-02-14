@@ -65,3 +65,42 @@ class CategoryForm(FlaskForm):
         user = storage.valCheck("name", value=name.data, cls="Category")
         if user:
             raise ValidationError('This category already exists.')
+
+
+class UserProfile(FlaskForm):
+    first_name = StringField('First Name',
+                           validators=[Length(min=2, max=20)])
+    last_name = StringField('Last Name',
+                           validators=[Length(min=2, max=20)])
+    email = StringField('Email',
+                        validators=[Email()])
+    phonenumber = StringField('Phone Number')
+    country = StringField('Country',
+                           validators=[ Length(min=8, max=20)], default="Ethiopia")
+    region = StringField('Region',
+                           validators=[Length(max=20)], default="Addis Ababa")
+    zone = StringField('Zone',
+                           validators=[Length(max=20)])
+    wereda = StringField('Wereda',
+                           validators=[Length(max=20)])
+    idnumb = StringField('ID Number',
+                           validators=[Length(min=2, max=128)])
+    profilepic = StringField('Profile Picture',
+                           validators=[Length(max=128)], default="profile.png")
+    
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=128)])
+
+    submit = SubmitField('Update My Profile')
+
+    def validate_email(self, email):
+        user = storage.valCheck("email", value=email.data)
+        if user and user.email != email.data:
+            print(user.email)
+            print(email.data)
+            print(user.email == email.data)
+            raise ValidationError('That email is taken. Please choose a different one.')
+        
+    def validate_phonenumber(self, phonenumber):
+        user = storage.valCheck("phonenumber", value=phonenumber.data)
+        if user and user.phonenumber is not phonenumber.data:
+            raise ValidationError('That phone number is taken. Please choose a different one.')

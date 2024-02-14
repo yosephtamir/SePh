@@ -10,6 +10,10 @@
     <link href="../static/css/container.css" rel="stylesheet" type="text/css">
     <link href="../static/css/footer.css" rel="stylesheet" type="text/css">
     <link href="../static/images/70x67seph.png" rel="icon thumbnail">
+    {% if title == 'My Profile' %}
+        <link href="../static/css/myprofile.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../static/{{current_user.username}}/{{current_user.profilepic}}" >
+    {% endif %}
     <title>Seph</title>
 </head>
 <body>
@@ -19,7 +23,7 @@
         </div>
         <div class="right">
             <nav>
-                <button id="homebtn"><a>Home</a></button>
+                <button id="homebtn"><a href="{{ url_for('home') }}">Home</a></button>
                 <button><a>Messages</a></button>
                 <button><a>Notifications</a></button>
                 <button><a>About</a></button>
@@ -28,15 +32,19 @@
             <div class="profile">
                 <img id="proimg" src="../static/images/profile.png" alt="Beka Gidada">
                 <div class="profilebtn">
-                    <button id="login"><a>Log In</a></button>
-                    <button id="register"><a>Sign Up</a></button>
+                    {% if current_user.is_authenticated %}
+                        <button id="login"><a href="{{ url_for('myprofile') }}">My Profile</a></button>
+                        <button id="register"><a href="{{ url_for('logout') }}">Log Out</a></button>
+                    {% else %}
+                        <button id="login"><a href="{{ url_for('login') }}">Log In</a></button>
+                        <button id="register"><a href="{{ url_for('register') }}">Sign Up</a></button>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </header>
-    <main role="main" class="container">
-        <div class="row">
-          <div class="col-md-8">
+    <div class="container">
+        <div class="col-md-8">
             {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
                 {% for category, message in messages %}
@@ -46,38 +54,8 @@
                 {% endfor %}
               {% endif %}
             {% endwith %}
-            {% block content %}{% endblock %}
           </div>
-    </main>
-
-    <div class="container">
-        <div class="content-section">
-            <form method="POST" action="">
-                {{ form.hidden_tag() }}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">Add Category</legend>
-                    <!--First Name-->
-                    <div class="form-group">
-                        {{ form.name.label(class="form-control-label") }}
-    
-                        {% if form.name.errors %}
-                            {{ form.name(class="form-control form-control-lg is-invalid") }}
-                            <div class="invalid-feedback">
-                                {% for error in form.name.errors %}
-                                    <span>{{ error }}</span>
-                                {% endfor %}
-                            </div>
-                        {% else %}
-                            {{ form.name(class="form-control form-control-lg") }}
-                        {% endif %}
-                    </div>
-                </fieldset>
-                <div class="form-group">
-                    {{ form.submit(class="btn btn-outline-info") }}
-                </div>
-            </form>
-        </div>
-        
+          {% block content %}{% endblock %}
     </div>
 <footer id="copyr">
     <h3 id="valyotime">SePh - Value your Time, Secure your property!</h3>

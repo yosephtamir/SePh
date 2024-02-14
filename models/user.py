@@ -9,9 +9,16 @@ from models.property import Property
 from models.messages import Messages
 from sqlalchemy import Column, String, Numeric, Boolean
 from sqlalchemy.orm import relationship
+from web import login_manager
+from flask_login import UserMixin
 
+@login_manager.user_loader
+def load_user(user_id):
+    from models import storage
+    user = storage.get(User, user_id)
+    return user
 
-class User(BaseModel, Base):
+class User(BaseModel, Base, UserMixin):
     """Representation of a user"""
 
     __tablename__ = 'user'

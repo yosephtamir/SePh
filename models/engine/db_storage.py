@@ -63,6 +63,10 @@ class DBStorage:
             objs = self.__session.query(classes[cls]).filter_by(name=value).first()
             return objs
 
+        if checkedVal == "id":
+            objs = self.__session.query(classes[cls]).filter_by(id=value).first()
+            return objs
+
     
     def countablefetch(self, cls=None, num=3):
         """query on the current database session with limit"""
