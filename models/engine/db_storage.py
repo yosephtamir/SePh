@@ -32,13 +32,58 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        self.__engine = create_engine("sqlite:///test.db", echo=True)
+        self.__engine = create_engine("sqlite:///seph.db", echo=True)
     def all(self, cls=None):
         """query on the current database session"""
         new_dict = {}
         for clss in classes:
             if cls is None or cls is classes[clss] or cls is clss:
                 objs = self.__session.query(classes[clss]).all()
+                for obj in objs:
+                    key = obj.__class__.__name__ + '.' + obj.id
+                    new_dict[key] = obj
+        return (new_dict)
+    
+
+    def valCheck(self, checkedVal, value, cls="User"):
+        """Used as a validation checker"""
+        if checkedVal == "username":
+            objs = self.__session.query(classes[cls]).filter_by(username=value).first()
+            return objs
+        
+        if checkedVal == "email":
+            objs = self.__session.query(classes[cls]).filter_by(email=value).first()
+            return objs
+        
+        if checkedVal == "phonenumber":
+            objs = self.__session.query(classes[cls]).filter_by(phonenumber=value).first()
+            return objs
+        
+        if checkedVal == "name":
+            objs = self.__session.query(classes[cls]).filter_by(name=value).first()
+            return objs
+
+        if checkedVal == "city":
+            objs = self.__session.query(classes[cls]).filter_by(city=value).first()
+            return objs
+        
+        if checkedVal == "subcity":
+            objs = self.__session.query(classes[cls]).filter_by(subcity=value).first()
+            return objs
+        
+
+        if checkedVal == "id":
+            objs = self.__session.query(classes[cls]).filter_by(id=value).first()
+            return objs
+
+    
+    def countablefetch(self, cls=None, num=3):
+        """query on the current database session with limit"""
+        new_dict = {}
+        for clss in classes:
+            if cls is None or cls is classes[clss] or cls is clss:
+                objs = self.__session.query(classes[clss]).limit(num).all()
+
                 for obj in objs:
                     key = obj.__class__.__name__ + '.' + obj.id
                     new_dict[key] = obj

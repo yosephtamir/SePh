@@ -1,0 +1,38 @@
+{% extends "common.html" %}
+{% block content %}
+<div class="container">
+    <div class="header">
+        <img id="myphoto" src="../static/images/{{current_user.username}}/profilepics/{{ current_user.profilepic }}", width="100px", height="100px">
+        <h3 class="name">{{ current_user.first_name }} {{ current_user.last_name }}</h3>
+
+    </div>
+    <div class="address">
+        <a href="tel:{{ current_user.phonenumber }}"><img class="addresslogo" src="../static/images/phone-call-svgrepo-com (1).svg"></a>
+        <a href="sms:{{ current_user.phonenumber }}"><img class="addresslogo sms" src="../static/images/sms-svgrepo-com (1).svg"></a>
+        <a href="mailto:{{ current_user.email }}"><img class="addresslogo email" src="../static/images/email-address-svgrepo-com (1).svg"></a>
+        <a href="https://maps.app.goo.gl/5CpD7ZhEE4eyBgZQ9"><img class="addresslogo" src="../static/images/location-svgrepo-com.svg"></a>
+    </div>
+
+</div>
+
+<div class="about">
+
+    <div class="overview">
+        <h3 class="point">Phone</h3>
+        <a href="tel:{{ current_user.phonenumber }}"><h4 class="subtitle">{{ current_user.phonenumber }}</h4></a>
+    </div>
+
+    <div class="overview">
+        <h3 class="point">Email</h3>
+        <a href="mailto:{{ current_user.email }}"><h4 class="subtitle">{{ current_user.email }}</h4></a>
+    </div>
+
+</div>
+
+<div id="profilearea">
+    <h1 id="profilecont"> <a id="editpro" href="{{ url_for('editprofile') }}"> Edit your Profile</a> </h1>
+    <h1 id="profilecont"> <a id="editpro" href="{{ url_for('addproperty') }}"> Post a property</a> </h1>
+</div>
+
+
+{% endblock content %}

@@ -8,7 +8,7 @@ from sqlalchemy import Column, String
 class Category(BaseModel, Base):
     """Representation of Category """
     __tablename__ = 'category'
-    name = Column(String(128), nullable=False)
+    name = Column(String(128), unique=True,nullable=False)
 
     def __init__(self, *args, **kwargs):
         """initializes category"""

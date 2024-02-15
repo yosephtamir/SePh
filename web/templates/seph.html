@@ -1,0 +1,95 @@
+{% extends "common.html" %}
+{% block content %}
+    <!-- Filter section-->
+    <div class="filter">
+        <div class="searchicon"></div>
+        <button class="searchbtn">Search</button>
+    </div>
+    <!--Recently added properties-->
+    
+    <div class="rows">
+        <h4>Recently added</h4>
+        <div class="rowcontainer">
+            <div class="oneproduct">
+                {% for property in properties  %}
+                <div class="propdetails">
+                    <h3>{{ property.user.first_name }} {{ property.user.last_name }}</h3>
+                    <img src="../static/images/{{property.user.username}}/property/{{ property.images[0].name }}" alt="{{property.name}}">
+                    <div class="priceplace">
+                        <h2>{{ property.price }} ETB</h2>
+                        <h5> {{ property.details }}</h5>
+                    </div>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+    <!--Appartments-->
+    <div class="rows">
+        <h4>Appartments</h4>
+        <div class="rowcontainer">
+            <div class="oneproduct">
+                <div class="propdetails">
+                    <h3>Beka Gidada</h3>
+                    <img src="../static/images/360_F_283657847_rmjsrJvJ0PkapV1uXWZDb9gIf9ftwJbd (1).jpg" alt="Beka Gidada">
+                    <div class="priceplace">
+                        <h2>6,000 Birr</h2>
+                        <h5> Bole Bulbula, 12 kare</h5>
+                    </div>
+                </div>
+                <div class="propdetails">
+                    <h3>Beka Gidada</h3>
+                    <img src="../static/images/360_F_283657847_rmjsrJvJ0PkapV1uXWZDb9gIf9ftwJbd (1).jpg" alt="Beka Gidada">
+                    <div class="priceplace">
+                        <h2>6,000 Birr</h2>
+                        <h5> Bole Bulbula, 12 kare</h5>
+                    </div>
+                </div>
+                <div class="propdetails">
+                    <h3>Beka Gidada</h3>
+                    <img src="../static/images/360_F_283657847_rmjsrJvJ0PkapV1uXWZDb9gIf9ftwJbd (1).jpg" alt="Beka Gidada">
+                    <div class="priceplace">
+                        <h2>6,000 Birr</h2>
+                        <h5> Bole Bulbula, 12 kare</h5>
+                    </div>
+                </div>
+            </div> 
+        </div>   
+    </div>
+
+    <!--For you-->
+    <div class="rows">
+        <h4>Find more</h4>
+        <div class="rowcontainer">
+            <div class="oneproduct">
+                <div class="propdetails">
+                    <h3>Beka Gidada</h3>
+                    <img src="../static/images/360_F_283657847_rmjsrJvJ0PkapV1uXWZDb9gIf9ftwJbd (1).jpg" alt="Beka Gidada">
+                    <div class="priceplace">
+                        <h2>6,000 Birr</h2>
+                        <h5> Bole Bulbula, 12 kare</h5>
+                    </div>
+                </div>
+                <div class="propdetails">
+                    <h3>Beka Gidada</h3>
+                    <img src="../static/images/360_F_283657847_rmjsrJvJ0PkapV1uXWZDb9gIf9ftwJbd (1).jpg" alt="Beka Gidada">
+                    <div class="priceplace">
+                        <h2>6,000 Birr</h2>
+                        <h5> Bole Bulbula, 12 kare</h5>
+                    </div>
+                </div>
+                <div class="propdetails">
+                    <h3>Beka Gidada</h3>
+                    <img src="../static/images/360_F_283657847_rmjsrJvJ0PkapV1uXWZDb9gIf9ftwJbd (1).jpg" alt="Beka Gidada">
+                    <div class="priceplace">
+                        <h2>6,000 Birr</h2>
+                        <h5> Bole Bulbula, 12 kare</h5>
+                    </div>
+                </div>
+            </div> 
+        </div>   
+    </div>
+{% endblock content %}

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="../static/css/header.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/mainbootstrap.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/filter.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/container.css" rel="stylesheet" type="text/css">
+    <link href="../static/css/footer.css" rel="stylesheet" type="text/css">
+    <link href="../static/images/70x67seph.png" rel="icon thumbnail">
+    {% if title == 'My Profile' %}
+        <link href="../static/css/myprofile.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="../static/{{current_user.username}}/{{current_user.profilepic}}" >
+    {% endif %}
+    {% if title %}
+        <title>SePh - {{ title }}</title>
+    {% else %}
+        <title>SePh</title>
+    {% endif %}
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="logoimg"></div>
+        </div>
+        <div class="right">
+            <nav>
+                <button id="homebtn"><a href="{{ url_for('home') }}">Home</a></button>
+                <button><a>Messages</a></button>
+                <button><a>Notifications</a></button>
+                <button><a>About</a></button>
+                <button><a>Contuct Us</a></button>
+            </nav>
+            <div class="profile">
+                <img id="proimg" src="../static/images/profile.png" alt="Beka Gidada">
+                <div class="profilebtn">
+                    {% if current_user.is_authenticated %}
+                        <button id="login"><a href="{{ url_for('myprofile') }}">My Profile</a></button>
+                        <button id="register"><a href="{{ url_for('logout') }}">Log Out</a></button>
+                    {% else %}
+                        <button id="login"><a href="{{ url_for('login') }}">Log In</a></button>
+                        <button id="register"><a href="{{ url_for('register') }}">Sign Up</a></button>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">
+                    {{ message }}
+                  </div>
+                {% endfor %}
+              {% endif %}
+            {% endwith %}
+          </div>
+          {% block content %}{% endblock %}
+    </div>
+<footer id="copyr">
+    <h3 id="valyotime">SePh - Value your Time, Secure your property!</h3>
+</footer>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="../static/scripts/filter.js"></script>
+</body>
+</html>
