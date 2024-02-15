@@ -1,7 +1,7 @@
 {% extends "common.html" %}
 {% block content %}
     <div class="content-section">
-        <form method="POST" action="">
+        <form method="POST" action="" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Join Today</legend>
@@ -141,17 +141,12 @@
                 </div>
                 <!-- profilepic -->
                 <div class="form-group">
-                    {{ form.profilepic.label(class="form-control-label") }}
-
+                    {{ form.profilepic.label() }}
+                    {{ form.profilepic(class="form-control-file") }}
                     {% if form.profilepic.errors %}
-                        {{ form.profilepic(class="form-control form-control-lg is-invalid") }}
-                        <div class="invalid-feedback">
-                            {% for error in form.profilepic.errors %}
-                                <span>{{ error }}</span>
-                            {% endfor %}
-                        </div>
-                    {% else %}
-                        {{ form.profilepic(class="form-control form-control-lg") }}
+                        {% for error in form.profilepic.errors %}
+                            <span class="text-danger">{{ error }}</span></br>
+                        {% endfor %}
                     {% endif %}
                 </div>
 
@@ -174,10 +169,5 @@
                 {{ form.submit(class="btn btn-outline-info") }}
             </div>
         </form>
-    </div>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Already Have An Account? <a class="ml-2" href="{{ url_for('login') }}">Sign In</a>
-        </small>
     </div>
 {% endblock content %}

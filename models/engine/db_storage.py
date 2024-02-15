@@ -32,7 +32,7 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        self.__engine = create_engine("sqlite:///test.db", echo=True)
+        self.__engine = create_engine("sqlite:///seph.db", echo=True)
     def all(self, cls=None):
         """query on the current database session"""
         new_dict = {}

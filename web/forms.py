@@ -1,12 +1,13 @@
 from flask_wtf import FlaskForm
 from models import storage
 from models.user import User
-from wtforms import FileField
+from flask_wtf.file import FileField, FileAllowed
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 
 class RegistrationForm(FlaskForm):
+    """Used for registering a new user"""
     first_name = StringField('First Name',
                            validators=[DataRequired(), Length(min=2, max=20)])
     last_name = StringField('Last Name',
@@ -17,19 +18,6 @@ class RegistrationForm(FlaskForm):
                         validators=[DataRequired(), Email()])
     phonenumber = StringField('Phone Number',
                            validators=[DataRequired(), Length(min=2, max=128)])
-    """country = StringField('Country',
-                           validators=[DataRequired(), Length(min=2, max=128)])
-    region = StringField('Region',
-                           validators=[DataRequired(), Length(min=2, max=128)])
-    zone = StringField('Zone',
-                           validators=[DataRequired(), Length(min=2, max=128)])
-    wereda = StringField('Wereda',
-                           validators=[DataRequired(), Length(min=2, max=128)])
-    idnumb = StringField('ID Number',
-                           validators=[DataRequired(), Length(min=2, max=128)])
-    profilepic = StringField('Profile Picture',
-                           validators=[Length(min=2, max=128)])"""
-    
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=128)])
     confirm_password = PasswordField('Confirm Password',
                                      validators=[DataRequired(), EqualTo('password')])
@@ -52,6 +40,7 @@ class RegistrationForm(FlaskForm):
 
 
 class LoginForm(FlaskForm):
+    """"used for user authentication"""
     email = StringField('Email',
                         validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -92,6 +81,7 @@ class SubCityForm(FlaskForm):
 
 
 class UserProfile(FlaskForm):
+    """"This form is used to update a user profile"""
     first_name = StringField('First Name',
                            validators=[Length(min=2, max=20)])
     last_name = StringField('Last Name',
@@ -109,8 +99,9 @@ class UserProfile(FlaskForm):
                            validators=[Length(max=20)])
     idnumb = StringField('ID Number',
                            validators=[Length(min=2, max=128)])
-    profilepic = StringField('Profile Picture',
-                           validators=[Length(max=128)], default="profile.png")
+    profilepic = FileField('Update profile Picture',
+                           validators=[FileAllowed(['jpg', 'png', 'jpeg',
+                                                    'PNG', 'JPEG', 'PNG'])])
     
     password = PasswordField('Password', validators=[DataRequired(), Length(min=8, max=128)])
 
@@ -119,29 +110,35 @@ class UserProfile(FlaskForm):
     def validate_email(self, email):
         user = storage.valCheck("email", value=email.data)
         if user and user.email != email.data:
-            print(user.email)
-            print(email.data)
-            print(user.email == email.data)
             raise ValidationError('That email is taken. Please choose a different one.')
         
     def validate_phonenumber(self, phonenumber):
         user = storage.valCheck("phonenumber", value=phonenumber.data)
-        if user and user.phonenumber is not phonenumber.data:
-            raise ValidationError('That phone number is taken. Please choose a different one.')
+        if user:
+            if user.phonenumber != phonenumber.data:
+                raise ValidationError('That phone number is taken. Please choose a different one.')
 
 class PropertyForm(FlaskForm):
-    name = StringField("Name", default="Addis Ababa")
+    """"This form is used to post a property"""
+    name = StringField("Name", validators=[DataRequired()])
     price = FloatField("Price", validators=[DataRequired()])
     kare = FloatField("Kare", validators=[DataRequired()])
+    category = StringField("Category", validators=[DataRequired()],
+                           default="Appartment")
     details = StringField("Details", validators=[DataRequired()])
-    city = StringField("City", default="Addis Ababa")
-    subcity = StringField("SubCity")
-    category = StringField("Category")
-    addressline1 = StringField("Address Line 2")
+    city = StringField("City", default="Addis Ababa", validators=[DataRequired()])
+    subcity = StringField("SubCity", validators=[DataRequired()])
+    addressline1 = StringField("Address Line 1", validators=[DataRequired()])
     addressline2 = StringField("Address Line 2")
-    image1 = StringField("Image 1", validators=[DataRequired()])
-    image2 = StringField("Image 2")
-    image3 = StringField("Image 3")
+    image1 = FileField('Image 1', validators=[DataRequired(), FileAllowed(['jpg', 'png',
+                                                           'jpeg', 'PNG',
+                                                           'JPEG', 'PNG'])])
+    image2 = FileField('Image 3', validators=[FileAllowed
+                                              (['jpg', 'png', 'jpeg',
+                                                'PNG', 'JPEG', 'PNG'])])
+    image3 = FileField('Image 3', validators=[FileAllowed
+                                              (['jpg', 'png', 'jpeg',
+                                                'PNG', 'JPEG', 'PNG'])])
 
     submit = SubmitField('Post Your Property')
 
