@@ -11,8 +11,11 @@ class ChatRoom(BaseModel, Base):
     """A chatroom representation"""
     __tablename__= "chatroom"
     last_message = Column(String(128), nullable=True)
-    userid = mapped_column(String(60), ForeignKey('user.id'))
+    userid1 = Column(String(60), ForeignKey('user.id'))
+    userid2 = Column(String(60), ForeignKey('user.id'))
 
+    usr1 = relationship("User", foreign_keys=[userid1])
+    usr2 = relationship("User", foreign_keys=[userid2])
     def __init__(self, *args, **kwargs):
         """initializes chatroom"""
         super().__init__(*args, **kwargs)

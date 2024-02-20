@@ -19,12 +19,12 @@
 
     <div class="overview">
         <h3 class="point">Phone</h3>
-        <a href="tel:{{ current_user.phonenumber }}"><h4 class="subtitle">{{ current_user.phonenumber }}</h4></a>
+        <a id="sublink" href="tel:{{ current_user.phonenumber }}"><h4 class="subtitle">{{ current_user.phonenumber }}</h4></a>
     </div>
 
     <div class="overview">
         <h3 class="point">Email</h3>
-        <a href="mailto:{{ current_user.email }}"><h4 class="subtitle">{{ current_user.email }}</h4></a>
+        <a id="sublink" href="mailto:{{ current_user.email }}"><h4 class="subtitle">{{ current_user.email }}</h4></a>
     </div>
 
 </div>

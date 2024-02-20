@@ -1,0 +1,41 @@
+{% extends "common.html" %}
+{% block content %}
+<div id="chatcontainer">
+{% for chat in roommessage %}
+  {% if chat.sentfromid == current_user.id %}
+    <div id="rightchat">
+      <p id="mess"> {{chat.massage}} </p>
+      <small id="text-muted">{{ chat.updated_at.strftime("%h %d %Y,   %I:%M %p") }}</small>
+    </div>
+  {% else %}
+    <div id="leftchat">
+      <p id="mess"> {{chat.massage}} </p>
+      <small id="text-muted">{{ chat.updated_at.strftime("%h %d %Y,   %I:%M %p") }}</small>
+    </div>
+  {% endif %}
+{% endfor %}
+</div>
+<div class="contents-section">
+  <form id="messagerep" method="POST" action="">
+      {{ form.hidden_tag() }}
+      <fieldset class="forma-group">
+          <div class="forma-group">
+              {% if form.message.errors %}
+                  {{ form.message(class="form-control form-control-lg is-invalid") }}
+                  <div class="invalid-feedback">
+                      {% for error in form.message.errors %}
+                          <span>{{ error }}</span>
+                      {% endfor %}
+                  </div>
+              {% else %}
+                  {{ form.message(class="form-control form-control-3g") }}
+              {% endif %}
+          </div>
+      </fieldset>
+      <div id="forma-group">
+          {{ form.submit(class="btn btn-outline-info") }}
+      </div>
+  </form>
+</div>
+
+{% endblock content %}

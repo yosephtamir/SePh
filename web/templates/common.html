@@ -10,6 +10,15 @@
     <link href="../static/css/container.css" rel="stylesheet" type="text/css">
     <link href="../static/css/footer.css" rel="stylesheet" type="text/css">
     <link href="../static/images/70x67seph.png" rel="icon thumbnail">
+    {% if title == 'chat' %}
+        <link href="../static/css/chat.css" rel="stylesheet" type="text/css">
+    {% endif %}
+    {% if title == 'My Rooms' %}
+        <link href="../static/css/roomuser.css" rel="stylesheet" type="text/css">
+    {% endif %}
+    {% if title == 'Property Details' %}
+        <link href="../static/css/propertydetails.css" rel="stylesheet" type="text/css">
+    {% endif %}
     {% if title == 'My Profile' %}
         <link href="../static/css/myprofile.css" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="../static/{{current_user.username}}/{{current_user.profilepic}}" >
@@ -19,6 +28,7 @@
     {% else %}
         <title>SePh</title>
     {% endif %}
+    <link href="../static/css/common.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <header>
@@ -28,7 +38,7 @@
         <div class="right">
             <nav>
                 <button id="homebtn"><a href="{{ url_for('home') }}">Home</a></button>
-                <button><a>Messages</a></button>
+                <button><a href="{{ url_for('myrooms') }}">Messages</a></button>
                 <button><a>Notifications</a></button>
                 <button><a>About</a></button>
                 <button><a>Contuct Us</a></button>
@@ -67,6 +77,9 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="../static/scripts/filter.js"></script>
+<script src="../static/scripts/filters.js"></script>
+{% if title == 'Property Details' %}
+    <script src="../static/scripts/propertydetails.js"></script>
+{% endif %}
 </body>
 </html>

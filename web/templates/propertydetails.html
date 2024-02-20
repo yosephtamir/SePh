@@ -1,0 +1,86 @@
+{% extends "common.html" %}
+{% block content %} 
+<div class="propercontainer">
+    <div class="propleft">
+        <section class="propertyuse">
+            <img id="myphoto" src="../static/images/{{theproperty.user.username}}/profilepics/{{ theproperty.user.profilepic }}" alt="" width="100px" height="100px" class="rounded-circle">
+            <div class="profilecontents">
+                <h3>{{ theproperty.user.first_name }} {{ theproperty.user.last_name }}</h3>
+                <small class="text-muted"><a id="mail" href="mailto:{{ theproperty.user.email }}">{{ theproperty.user.email }}</a></small>
+                <small class="text-muted"><a id="mail" href="tel:{{ theproperty.user.phonenumber }}">{{ theproperty.user.phonenumber }}</a></small>
+            </div>
+        </section>
+        
+    </div>
+
+    <div class="propright">
+        <div class="profilecontents">
+            <h3>{{ theproperty.name }}</h3>
+            <small class="text-muted">Date posted: {{ theproperty.updated_at.strftime("%h %d %Y,   %I:%M %p") }}</small>
+        </div>
+        <div class="singledetails">
+            <img src="../static/images/{{theproperty.user.username}}/property/{{ theproperty.images[0].name }}" width="90%" id="img0" alt="{{theproperty.name}}">
+            <div class="lebelcontainer">
+                <div class="singlepriceplace">
+                    <h2 id="detpricePrice">Price:</h2> <p id="detprice">{{ theproperty.price }} ETB </p>
+                </div>
+            </div>
+            <div class="lebelcontainer">
+                <div class="multiline">
+                    <div class="singlepriceplace">
+                        <h2 id="detpricePrice">Category</h2> <p class="proplocation" id="detprice">{{category.name}}</p>
+                    </div>
+                    <div class="singlepriceplace">
+                        <h2 id="detpricePrice">Area:</h2> <p id="detprice">{{ theproperty.kare }} Kare </p>
+                    </div>
+                    <div class="singlepriceplace">
+                        <h2 id="detpricePrice">Located at:</h2> <p class="proplocation" id="detprice">{{subcity.city.city}},{{ subcity.subcity }}: {{ place.addressLine1 }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="lebelcontainer">
+                <div class="singlepriceplace">
+                     <p id="detprice"> {{ theproperty.details }} </p>
+                </div>
+            </div>
+        </div>
+        {% if count > 1 %}
+        <div class="lebelcontainer">
+            <div class="singlepriceplace">
+                 <p id="detprice"> Other Images </p>
+            </div>
+            {% for image in theproperty.images %}
+            {% if image.name != theproperty.images[0].name %}
+                <img src="../static/images/{{theproperty.user.username}}/property/{{ image.name}}" width="90%" id="img0" alt="{{theproperty.name}}">
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if current_user.id == theproperty.user.id %}
+            <div class="lebelcontainer">
+                <div class="multiline">
+                <div class="singlepriceplace">
+                    <p id="detprice"> <a href="{{ url_for('updateproperty', propertyid=theproperty.id) }}"> <button> Edit Property </button></p></a>
+                    <p id="detprice"> <button id="delpropbtn"> Delete Property </button></p>
+                </div>
+                <div class="singlepriceplace" id="delprop">
+                    <p id="detprice">Are you sure you want to delete the property?</p>
+                    <p id="detprice"> <a href="{{ url_for('delDetails', property_id=theproperty.id) }}"> Yes</p></a>
+                    <p id="detprice"> <a href="{{ url_for('propertyDetails', property_id=theproperty.id) }}"> No</p></a>
+                </div>
+            </div>
+            </div>
+        {% endif %}
+        {% if current_user.id != theproperty.user.id %}
+            <div class="lebelcontainer">
+                <div class="multiline">
+                <div class="singlepriceplace">
+                    <p id="detprice"> <a href="{{ url_for('newmessage', userid=theproperty.user.id) }}"> <button> Send Message </button></p></a>
+                </div>
+            </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock content %}

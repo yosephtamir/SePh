@@ -1,0 +1,33 @@
+{% extends "common.html" %}
+{% block content %}
+{% for room in myrooms %}
+<div class="roomuser">
+    {% if current_user.id == room.userid1 %}
+        {% for user in users %}
+            {% if user.id == room.userid2 %}
+            <div class="roomusercontainer">
+              <img src="../static/images/{{user.username}}/profilepic/{{ user.profilepic }}" alt="" id="avatar">
+              <div class="usrlebel">
+                <p id="usrnme"> <a href="{{url_for('mychats', chatroomid=room.id)}}" id="usrnme"> {{user.first_name}} </p> </a>
+                <small class="text-muted">{{ room.last_message }} {{ room.updated_at.strftime("%h %d %Y,   %I:%M %p") }} </small> 
+              </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        {% for user in users %}
+            {% if user.id == room.userid1 %}
+            <div class="roomusercontainer">
+              <img src="../static/images/{{user.username}}/profilepic/{{ user.profilepic }}" alt="" id="avatar">
+              <div class="usrlebel">
+                <p id="usrnme"> <a href="{{url_for('mychats', chatroomid=room.id)}}" id="usrnme"> {{user.first_name}} </p> </a>
+                <small class="text-muted">{{ room.last_message }} {{ room.updated_at.strftime("%h %d %Y,   %I:%M %p") }} </small>
+              </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</div>
+
+{% endfor %}
+{% endblock content %}
