@@ -5,6 +5,7 @@
     justify-content: center;
     margin: auto;
     width: 90%;
+    height: fit-content;
 }
 .rows {
     height: 293px;
@@ -87,4 +88,32 @@
     gap: 20px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+#more {
+    color: #0D99FF;
+    text-decoration: none;
+}
+
+.morecontainer {
+    display: flex;
+    flex-wrap: wrap;
+    height: 269px;
+    border-top: 1px solid #0D99FF;
+    border-bottom: 1px solid #0D99FF;
+    border-radius: 10px;
+    padding: 5px;
+    gap: 10px;
+    width: 98%;
+    justify-content: space-around;
+    height: fit-content;
+}
+
+.leftalign {
+    display: flex;
+    width: 100%;
+    text-align: left;
+}
+
+.leftalign h4 {
+    font-size: 16px;
 }

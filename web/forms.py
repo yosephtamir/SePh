@@ -1,8 +1,12 @@
 from flask_wtf import FlaskForm
 from models import storage
 from models.user import User
+from models.city import City
+from models.subcity import SubCity
+from models.category import Category
 from flask_wtf.file import FileField, FileAllowed
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, FloatField
+from wtforms import PasswordField, SubmitField, BooleanField, FloatField
+from wtforms import StringField, TextAreaField, RadioField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 
 
@@ -120,14 +124,31 @@ class UserProfile(FlaskForm):
 
 class PropertyForm(FlaskForm):
     """"This form is used to post a property"""
+    citydict = storage.all(City).values()
+    subcitydict = storage.all(SubCity).values()
+    catagories = storage.all(Category).values()
+    citylist = []
+    subcitylist = []
+    catagorylist = []
+
+    for city in citydict:
+        citylist.append((city.city, city.city))
+    
+    for subcity in subcitydict:
+        subcitylist.append((str(subcity.subcity), str(subcity.subcity)))
+
+    for catagory in catagories:
+        catagorylist.append((str(catagory.name), str(catagory.name)))
+
+
+
     name = StringField("Name", validators=[DataRequired()])
     price = FloatField("Price", validators=[DataRequired()])
     kare = FloatField("Kare", validators=[DataRequired()])
-    category = StringField("Category", validators=[DataRequired()],
-                           default="Appartment")
+    category = SelectField("Catagory", choices=catagorylist, validators=[DataRequired()])
     details = StringField("Details", validators=[DataRequired()])
-    city = StringField("City", default="Addis Ababa", validators=[DataRequired()])
-    subcity = StringField("SubCity", validators=[DataRequired()])
+    city = SelectField("City", choices=citylist, validators=[DataRequired()])
+    subcity = SelectField("SubCity", choices=subcitylist, validators=[DataRequired()])
     addressline1 = StringField("Address Line 1", validators=[DataRequired()])
     addressline2 = StringField("Address Line 2")
     image1 = FileField('Image 1', validators=[DataRequired(), FileAllowed(['jpg', 'png',
@@ -152,3 +173,33 @@ class PropertyForm(FlaskForm):
         categoryname = storage.valCheck("name", value=category.data, cls="Category")
         if categoryname == None:
             raise ValidationError('Category does not exist')
+        
+
+class EditPropertyForm(FlaskForm):
+    """"This form is used to post a property"""
+    name = StringField("Name", validators=[DataRequired()])
+    price = FloatField("Price", validators=[DataRequired()])
+    kare = FloatField("Kare", validators=[DataRequired()])
+    details = StringField("Details", validators=[DataRequired()])
+
+    submit = SubmitField('Update Your Property')
+
+    
+    def validate_name(self, name):
+        if name == None or name == "":
+            raise ValidationError('Name can not be none')
+        
+    def validate_price(self, price):
+        if price == None or price == "":
+            raise ValidationError('price can not be none')
+    def validate_kare(self, kare):
+        if kare == None or kare == "":
+            raise ValidationError('kare can not be none')
+    def validate_details(self, details):
+        if details == None or details == "":
+            raise ValidationError('details can not be none')
+        
+class MessageForm(FlaskForm):
+    """"This form is used to post a property"""
+    message = TextAreaField("Message", validators=[DataRequired()])
+    submit = SubmitField('Send')

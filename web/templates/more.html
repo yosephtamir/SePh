@@ -1,0 +1,21 @@
+{% extends "common.html" %}
+{% block content %}
+<div class="leftalign">
+  <h4>Recently added {{ lowertitle }}</h4>
+</div>
+  <div class="morecontainer">
+        {% for property in properties  %}
+          <div class="propdetails">
+              <h3>{{ property.user.first_name }} {{ property.user.last_name }}</h3>
+              <a href="{{ url_for('propertyDetails', property_id=property.id) }}"><img src="../static/images/{{property.user.username}}/property/{{ property.images[0].name }}" alt="{{property.name}}"></a>
+              <div class="priceplace">
+                  <h2>{{ property.price }} ETB</h2>
+                  <h5>{{ property.details[:24] }}</h5>
+              </div>
+          </div>
+        {% endfor %}
+  </div>
+  <div class="leftalign">
+    <a id="more" href="#">More</a>
+  </div>
+{% endblock content %}

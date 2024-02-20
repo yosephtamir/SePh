@@ -57,3 +57,17 @@
     color: #fff;
     text-decoration: none;
   }
+  #forma-group {
+    float: right;
+    position: relative;
+  }
+  .contents-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+  }
+  #messagerep {
+    align-content: center;
+    width: 100%;
+  }
