@@ -450,6 +450,7 @@ def mychats(chatroomid):
                                 sentfromid=current_user.id, chatroomid=chatroomid)
             storage.new(newmessage)
             storage.save()
+            return redirect(url_for('mychats', chatroomid=chatroomid))
 
     return render_template("roomessage.html", title='chat', form=form, roommessage=roommessage)
 
