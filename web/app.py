@@ -448,7 +448,9 @@ def mychats(chatroomid):
         if form.message.data and form.message.data != "":
             newmessage = Messages(massage=form.message.data, senttoid=userid,
                                 sentfromid=current_user.id, chatroomid=chatroomid)
+            chatroom.last_message = form.message.data
             storage.new(newmessage)
+            storage.new(chatroom)
             storage.save()
             return redirect(url_for('mychats', chatroomid=chatroomid))
 

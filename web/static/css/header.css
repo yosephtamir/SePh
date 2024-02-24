@@ -44,7 +44,9 @@ header {
     border: none;
     font-size: large;
 }
-
+.right nav button a{
+    color: white;
+}
 .right .profile img:hover, .logoimg:hover,
 .right nav button:hover, #register:hover,
 #login:hover  {
@@ -78,4 +80,8 @@ header {
     height: 30px;
     font-size: large;
     width: 85%;
+}
+.profilebtn button a {
+    background-color: #0D99ff;
+    color: white;
 }
