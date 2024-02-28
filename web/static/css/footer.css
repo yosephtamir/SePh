@@ -14,3 +14,20 @@
     font-size: 18px;
     align-self: center;
 }
+@media only screen and (max-width: 500px) {
+    #copyr{
+        width: 100%;
+        height: 55px;
+        background-color: #0D99ff;
+        bottom: 0px;
+        display: flex;
+        justify-content: center;
+        color: white;
+        margin-top: 20px;
+        bottom: 0;
+    }
+    #valyotime {
+        font-size: 14px;
+        align-self: center;
+    }
+}

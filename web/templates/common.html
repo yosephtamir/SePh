@@ -48,9 +48,17 @@
                 <img id="proimg" src="../static/images/profile.png" alt="Beka Gidada">
                 <div class="profilebtn">
                     {% if current_user.is_authenticated %}
+                        <button class="mob" id="homebtn"><a href="{{ url_for('home') }}">Home</a></button>
+                        <button class="mob"><a href="{{ url_for('myrooms') }}">Messages</a></button>
+                        <button class="mob"><a>About</a></button>
+                        <button class="mob"><a>Contuct Us</a></button>
                         <button id="login"><a href="{{ url_for('myprofile') }}">My Profile</a></button>
                         <button id="register"><a href="{{ url_for('logout') }}">Log Out</a></button>
                     {% else %}
+                        <button class="mob" id="homebtn"><a href="{{ url_for('home') }}">Home</a></button>
+                        <button class="mob"><a href="{{ url_for('myrooms') }}">Messages</a></button>
+                        <button class="mob"><a>About</a></button>
+                        <button class="mob"><a>Contuct Us</a></button>
                         <button id="login"><a href="{{ url_for('login') }}">Log In</a></button>
                         <button id="register"><a href="{{ url_for('register') }}">Sign Up</a></button>
                     {% endif %}

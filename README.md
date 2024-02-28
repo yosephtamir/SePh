@@ -21,7 +21,7 @@ administrators can add a city, subcity and category of the property using the fo
 
 ## Database
 For the ease of use SQLLite database is used in this project and can be changed from "/models/engine/db_storage.py" according to your needs.
-Every database abstraction is located in /models/* directory. In this project SQLAlchemy is used as an Object Relational Mapper(ORM) Every Class of the table inherits from the basemodel located in /models directory
+Every database abstraction is located in /models/* directory. In this project SQLAlchemy is used as an Object Relational Mapper(ORM) Every Class of the table inherits from the basemodel located in /models directory ***We have used sqlalchemy 2.0.0(pip install sqlalchemy=="2.0.0")***
 
 ### This project has 10 db tables
 1. user: is used to hold all datas of a user up on registration. most of the other tables are associated to a single user.
