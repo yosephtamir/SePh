@@ -31,3 +31,35 @@
     opacity: 90%;
     scale: 1.05;
 }
+
+@media only screen and (max-width: 600px) {
+    .filter {
+        height: 50px;
+        border-radius: 8px;
+        border: 1px solid #0D99ff;
+        width: 80%;
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .searchicon {
+        width: 30px;
+        height: 30px;
+        margin-left: 2px;
+        border-right: none;
+        background: url("../images/searchicon.png") no-repeat;
+        background-size: cover;
+    
+    }
+    .searchbtn {
+        width: 30%;
+        background-color: #0D99ff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        height: 40px;
+        font-size: large;
+        margin-right: 10px;
+    }
+}

@@ -102,3 +102,20 @@ header {
         display: block;
     }
 }
+
+
+@media only screen and (max-width: 720px) {
+    .logo {
+        display: flex;
+        width: 30%;
+        align-items: center;
+        justify-content: center;
+    }
+    .logoimg {
+        background: url("../images/70x67seph.png") no-repeat;
+        background-size: cover;
+        width: 50px;
+        height: 50px;
+        margin: auto;
+    }
+}

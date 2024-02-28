@@ -122,3 +122,26 @@
         min-width: 300px!important;
     }
 }
+
+@media only screen and (max-width: 999px) {
+    .rowcontainer {
+        border-top: 1px solid #0D99FF;
+        border-bottom: 1px solid #0D99FF;
+        border-radius: 10px;
+        padding: 5px;
+    }
+    .oneproduct {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        width: fit-content;
+        height: fit-content;
+    }
+    .rows {
+        height: fit-content;
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+    }
+
+}
