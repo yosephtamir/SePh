@@ -1,6 +1,5 @@
 .propercontainer {
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
     justify-content: space-around;
     margin-top: 20px;
@@ -95,4 +94,39 @@ a {
 #detprice button:hover {
     opacity: .9;
     scale: 1.05;
+}
+
+/*fonts*/
+.profilecontents h3 {
+    font-size: 1.5vw;
+}
+#detpricePrice, #detprice {
+    font-size: 2vh;
+}
+@media only screen and (max-width: 999px) {
+    .profilecontents h3 {
+        font-size: 14px;
+    }
+    #myphoto {
+        width: 60px;
+        height: 60px;
+    }
+    .profilecontents .text-muted {
+        text-wrap: wrap;
+    }
+    .profilecontents {
+        flex-wrap: wrap;
+    }
+}
+@media only screen and (max-width: 750px) { 
+    .propercontainer {
+        flex-direction: column;
+        gap: 5px;
+    }
+    .propleft {
+        width: 98%;
+    }
+    .propright {
+        width: 98%;
+    }
 }

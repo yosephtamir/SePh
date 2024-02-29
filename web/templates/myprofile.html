@@ -32,6 +32,7 @@
 <div id="profilearea">
     <h1 id="profilecont"> <a id="editpro" href="{{ url_for('editprofile') }}"> Edit your Profile</a> </h1>
     <h1 id="profilecont"> <a id="editpro" href="{{ url_for('addproperty') }}"> Post a property</a> </h1>
+    <h1 id="profilecont"> <a id="editpro" href="{{ url_for('userproperty', userid=current_user.id) }}"> My properties</a> </h1>
 </div>
 
 

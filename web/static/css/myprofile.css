@@ -190,3 +190,24 @@ h4 {
 #sublink:hover {
   text-decoration: none;
 }
+.name {
+  font-size: 4vh;
+}
+.point {
+  font-size: 1.5vh;
+}
+#sublink .subtitle, #profilecont #editpro {
+  font-size: 2vh;
+}
+@media only screen and (max-width: 750px) { 
+  .propercontainer {
+      flex-direction: column;
+      gap: 5px;
+  }
+  .propleft {
+      width: 98%;
+  }
+  .propright {
+      width: 98%;
+  }
+}

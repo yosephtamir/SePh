@@ -100,6 +100,21 @@ def allproperty():
                            properties=allproperty, title='Properties',
                            lowertitle='properties')
 
+@app.route('/properties/<userid>', strict_slashes=False)
+def userproperty(userid):
+    """serves all the posted properties"""
+    user = storage.get(User, userid)
+    allproperty = storage.all(Property).values()
+    proplist = []
+    for property in allproperty:
+        if property.user_id == userid:
+            proplist.append(property)
+    allproperty = sorted(proplist, key=lambda k: k.updated_at, reverse=True)
+
+    return render_template('more.html',
+                           properties=allproperty, title=f'{user.first_name}Properties',
+                           lowertitle='properties')
+
 
 @app.route('/appartments', strict_slashes=False)
 def appartments():
