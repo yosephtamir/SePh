@@ -34,6 +34,7 @@ Every database abstraction is located in /models/* directory. In this project SQ
 
 ## The app
 app.py contains all the routes to the web app with all the abstractions used to be served in the web pages
+to run with gunicorn use gunicorn -w 3 web.app:app
 
 ## Recommendations
 The frontend of the app is not fully implemented yet, and jquery  is planned to be used. API will be developed soon. It is not yet customized for all screen sizes
