@@ -4,7 +4,9 @@
     background-color: #0D99ff;
     bottom: 0px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     color: white;
     margin-top: 10px;
     position: relative;
