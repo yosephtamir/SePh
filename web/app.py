@@ -407,7 +407,7 @@ def newmessage(userid):
                             sentfromid=current_user.id, chatroomid=theroom.id)
         storage.new(newmessage)
         storage.save()
-        return redirect(url_for('home'))
+        return redirect(url_for('mychats', chatroomid=theroom.id))
     return render_template('newmessage.html', title='New Message', form=form)
 
 @app.route("/myrooms", strict_slashes=False, methods=["GET", "POST"])
