@@ -6,8 +6,9 @@
     display: flex;
     justify-content: center;
     color: white;
-    margin-top: 20px;
-    bottom: 0;
+    margin-top: 10px;
+    position: relative;
+    bottom: 0; 
 }
 #valyotime {
     font-weight: 200;
@@ -23,7 +24,6 @@
         display: flex;
         justify-content: center;
         color: white;
-        margin-top: 20px;
         bottom: 0;
     }
     #valyotime {

@@ -12,7 +12,7 @@
     <link href="../static/images/70x67seph.png" rel="icon thumbnail">
     {% if title == 'chat' %}
         <link href="../static/css/chat.css" rel="stylesheet" type="text/css">
-        <meta http-equiv="refresh" content="10" />
+        <meta http-equiv="refresh" content="600" />
     {% endif %}
     {% if title == 'My Rooms' %}
         <link href="../static/css/roomuser.css" rel="stylesheet" type="text/css">
@@ -32,63 +32,65 @@
     <link href="../static/css/common.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <header>
-        <div class="logo">
-            <div class="logoimg"></div>
-        </div>
-        <div class="right">
-            <nav>
-                <button id="homebtn"><a href="{{ url_for('home') }}">Home</a></button>
-                <button><a href="{{ url_for('myrooms') }}">Messages</a></button>
-                <button><a>Notifications</a></button>
-                <button><a>About</a></button>
-                <button><a>Contuct Us</a></button>
-            </nav>
-            <div class="profile">
-                <img id="proimg" src="../static/images/profile.png" alt="Beka Gidada">
-                <div class="profilebtn">
-                    {% if current_user.is_authenticated %}
-                        <button class="mob" id="homebtn"><a href="{{ url_for('home') }}">Home</a></button>
-                        <button class="mob"><a href="{{ url_for('myrooms') }}">Messages</a></button>
-                        <button class="mob"><a>About</a></button>
-                        <button class="mob"><a>Contuct Us</a></button>
-                        <button id="login"><a href="{{ url_for('myprofile') }}">My Profile</a></button>
-                        <button id="register"><a href="{{ url_for('logout') }}">Log Out</a></button>
-                    {% else %}
-                        <button class="mob" id="homebtn"><a href="{{ url_for('home') }}">Home</a></button>
-                        <button class="mob"><a href="{{ url_for('myrooms') }}">Messages</a></button>
-                        <button class="mob"><a>About</a></button>
-                        <button class="mob"><a>Contuct Us</a></button>
-                        <button id="login"><a href="{{ url_for('login') }}">Log In</a></button>
-                        <button id="register"><a href="{{ url_for('register') }}">Sign Up</a></button>
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-    </header>
-    <div class="container">
-        <div class="col-md-8">
-            {% with messages = get_flashed_messages(with_categories=true) %}
-              {% if messages %}
-                {% for category, message in messages %}
-                  <div class="alert alert-{{ category }}">
-                    {{ message }}
-                  </div>
-                {% endfor %}
-              {% endif %}
-            {% endwith %}
+  <header>
+      <div class="logo">
+          <div class="logoimg"></div>
+      </div>
+      <div class="right">
+          <nav>
+              <button><a id="homebtn" href="{{ url_for('home') }}">Home</a></button>
+              <button><a href="{{ url_for('myrooms') }}">Messages</a></button>
+              <button><a>Notifications</a></button>
+              <button><a>About</a></button>
+              <button><a>Contuct Us</a></button>
+          </nav>
+          <div class="profile">
+              <img id="proimg" src="../static/images/profile.png" alt="Beka Gidada">
+              <div class="profilebtn">
+                  {% if current_user.is_authenticated %}
+                      <button class="mob"><a id="homebtn" href="{{ url_for('home') }}">Home</a></button>
+                      <button class="mob"><a href="{{ url_for('myrooms') }}">Messages</a></button>
+                      <button class="mob"><a>About</a></button>
+                      <button class="mob"><a>Contuct Us</a></button>
+                      <button id="login"><a href="{{ url_for('myprofile') }}">My Profile</a></button>
+                      <button id="register"><a href="{{ url_for('logout') }}">Log Out</a></button>
+                  {% else %}
+                      <button class="mob" id="homebtn"><a href="{{ url_for('home') }}">Home</a></button>
+                      <button class="mob"><a href="{{ url_for('myrooms') }}">Messages</a></button>
+                      <button class="mob"><a>About</a></button>
+                      <button class="mob"><a>Contuct Us</a></button>
+                      <button id="login"><a href="{{ url_for('login') }}">Log In</a></button>
+                      <button id="register"><a href="{{ url_for('register') }}">Sign Up</a></button>
+                  {% endif %}
+              </div>
           </div>
-          {% block content %}{% endblock %}
+      </div>
+  </header>
+  <div class="container">
+      <div class="col-md-8">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+        </div>
+        {% block content %}{% endblock %}
+  </div>
+  <footer>
+    <div id="copyr" class="foot">
+      <h3 id="valyotime">SePh - Value your Time, Secure your property!</h3>
     </div>
-<footer id="copyr">
-    <h3 id="valyotime">SePh - Value your Time, Secure your property!</h3>
-</footer>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<script src="../static/scripts/filters.js"></script>
-{% if title == 'Property Details' %}
-    <script src="../static/scripts/propertydetails.js"></script>
-{% endif %}
+  </footer>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <script src="../static/scripts/filters.js"></script>
+  {% if title == 'Property Details' %}
+      <script src="../static/scripts/propertydetails.js"></script>
+  {% endif %}
 </body>
 </html>

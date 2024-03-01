@@ -112,7 +112,7 @@ def userproperty(userid):
     allproperty = sorted(proplist, key=lambda k: k.updated_at, reverse=True)
 
     return render_template('more.html',
-                           properties=allproperty, title=f'{user.first_name}Properties',
+                           properties=allproperty, title=f'{user.first_name} Properties',
                            lowertitle='properties')
 
 

@@ -24,6 +24,8 @@
     width: 30px;
     height: 30px;
     border-radius: 30px;
+    margin-right: 10px;
+    margin-left: 5px;
 }
 
 #usrnme {
@@ -31,3 +33,13 @@
     color: #0D99ff;
     margin: 0px;
 }
+@media only screen and (max-width: 720px) {
+    .roomusercontainer {
+        width: 100%;
+    }
+ }
+ @media only screen and (max-width: 360px) {
+    .roomusercontainer {
+        height: fit-content;
+    }
+ }
