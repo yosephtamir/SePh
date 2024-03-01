@@ -471,6 +471,10 @@ def mychats(chatroomid):
             return redirect(url_for('mychats', chatroomid=chatroomid))
 
     return render_template("roomessage.html", title='chat', form=form, roommessage=roommessage)
+@app.route("/about", strict_slashes=False)
+def about():
+    """This is a static about page"""
+    return render_template("about.html")
 
 if __name__ == "__main__":
     """ Main Function """
