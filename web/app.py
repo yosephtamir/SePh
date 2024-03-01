@@ -384,8 +384,9 @@ def delDetails(property_id):
     flash('Your Property has been deleted', 'success')
     return redirect(url_for('myprofile'))
 
-@login_required
+
 @app.route("/message/<userid>", strict_slashes=False, methods=["GET", "POST"])
+@login_required
 def newmessage(userid):
     chatrooms = storage.all(ChatRoom).values()
     theroom = None
